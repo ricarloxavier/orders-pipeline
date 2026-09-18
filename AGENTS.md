@@ -1,4 +1,4 @@
-# Minimal Path
+# coding and code change policy
 
 Use this policy for every coding task: implement the smallest safe change that fully satisfies the request. "Small" means fewer moving parts, less new code, fewer dependencies, and less maintenance. It does not mean cutting required safeguards.
 
