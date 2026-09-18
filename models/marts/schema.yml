@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: Type 1 customer dimension using the latest observed order attributes.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: customer_name
+        data_tests: [not_null]
+      - name: customer_email
+        data_tests: [not_null]
+
+  - name: dim_products
+    description: Type 1 product dimension using the latest observed order attributes.
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+      - name: product_name
+        data_tests: [not_null]
+      - name: product_category
+        data_tests: [not_null]
+
+  - name: fct_orders
+    description: One row per source order, including cancelled orders.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+      - name: order_amount
+        data_tests: [not_null]
+      - name: order_currency
+        data_tests: [not_null]
+      - name: order_date
+        data_tests: [not_null]
+      - name: order_status
+        data_tests: [not_null]
+
+  - name: mart_daily_order_metrics
+    description: Daily order-value and status measures kept separate by currency.
+    columns:
+      - name: order_date
+        data_tests: [not_null]
+      - name: order_currency
+        data_tests: [not_null]
+      - name: total_order_count
+        data_tests: [not_null]
+      - name: total_order_value
+        data_tests: [not_null]
+      - name: non_cancelled_order_value
+        data_tests: [not_null]
+

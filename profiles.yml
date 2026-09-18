@@ -1,0 +1,13 @@
+orders_pipeline:
+  target: postgres
+  outputs:
+    postgres:
+      type: postgres
+      host: "{{ env_var('DB_HOST', 'localhost') }}"
+      port: "{{ env_var('DB_PORT', '5432') | int }}"
+      dbname: "{{ env_var('DB_NAME', 'orders') }}"
+      user: "{{ env_var('DB_USER', 'orders') }}"
+      pass: "{{ env_var('DB_PASSWORD', 'local_only_password') }}"
+      schema: analytics
+      threads: 4
+

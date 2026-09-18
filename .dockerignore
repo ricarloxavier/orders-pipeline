@@ -1,0 +1,7 @@
+.git
+.terraform
+logs
+target
+*.duckdb
+*.tfstate*
+

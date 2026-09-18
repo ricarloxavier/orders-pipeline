@@ -1,0 +1,21 @@
+version: 2
+
+seeds:
+  - name: sample_orders
+    description: Static customer-order fixture supplied with the exercise.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests: [not_null]
+      - name: product_id
+        data_tests: [not_null]
+      - name: order_amount
+        data_tests: [not_null]
+      - name: order_currency
+        data_tests: [not_null]
+      - name: order_date
+        data_tests: [not_null]
+      - name: order_status
+        data_tests: [not_null]
+

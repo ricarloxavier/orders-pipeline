@@ -1,0 +1,32 @@
+name: orders_pipeline
+version: 1.0.0
+config-version: 2
+
+profile: orders_pipeline
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  orders_pipeline:
+    staging:
+      +schema: staging
+
+seeds:
+  orders_pipeline:
+    +schema: raw
+    sample_orders:
+      +column_types:
+        order_id: bigint
+        customer_id: bigint
+        customer_name: text
+        customer_email: text
+        product_id: bigint
+        product_name: text
+        product_category: text
+        order_amount: numeric(12,2)
+        order_currency: text
+        order_date: date
+        order_status: text
