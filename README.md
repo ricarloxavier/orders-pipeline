@@ -36,6 +36,18 @@ docker compose down
 docker compose down --volumes
 ```
 
+## View dbt docs locally
+
+After running the pipeline once, generate and serve its documentation:
+
+```bash
+docker compose up -d --wait postgres
+docker compose run --rm pipeline dbt docs generate
+docker compose run --rm -p 127.0.0.1:8080:8080 pipeline \
+  dbt docs serve --host 0.0.0.0 --port 8080
+```
+
+Open http://localhost:8080. The second command writes the docs to `target/`; the third serves them from a temporary container using the same pipeline image. Press Ctrl+C to stop the docs server. This is a local preview, not a public deployment.
 
 ## Models and measures
 
